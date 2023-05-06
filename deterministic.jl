@@ -6,8 +6,8 @@ using Printf
 using LinearAlgebra
 Random.seed!(123)
 
-H = 2
-J = 2
+H = 4
+J = 4
 T = 2
 Ω = 2
 p = [1/Ω for ω in 1:Ω]
@@ -23,7 +23,9 @@ l = range(200, stop=200 + (H-1)*10 , step=10)
 zᶜ = collect(l)
 # zᵐ ##################
 l = fill(10, H)
-zᵐ = Diagonal(l)
+l = Diagonal(l)
+zᵐ = fill(10,H,J)
+zᵐ = zᵐ - l
 
 D1 = hcat(fill(1, H), fill(2, H))
 
