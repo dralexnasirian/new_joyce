@@ -58,6 +58,28 @@ c4 = @constraint(m, [j in 1:J , t in 1:T , ω in 1:Ω], sum( α[h,j,t,ω] for h 
 optimize!(m)
 
 
-@show num_variables(m)
-@show num_constraints(m; count_variable_in_set_constraints = false);
-@show solve_time(m);
+no_var = num_variables(m)
+no_con = num_constraints(m; count_variable_in_set_constraints = false);
+time =  solve_time(m);
+obj = objective_value(m);
+ψᵏ = value.(ψ)
+χᵏ = value.(χ)
+γᵏ = value.(γ)
+no_permanent =  sum(ψᵏ)
+no_skills = sum(χᵏ)
+ave_casual = sum(γᵏ) / (J*T*Ω)
+
+DataFrame(
+    H=H,
+    J=J,
+    T=T,
+    Ω=Ω,
+    no_var=no_var,
+    no_con=no_con,
+    time=time,
+    obj=obj,
+    no_permanent=no_permanent,
+    no_multi=no_skills-no_permanent,
+    ave_casual = ave_casual
+    )
+
