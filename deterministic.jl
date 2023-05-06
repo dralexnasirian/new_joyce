@@ -6,8 +6,8 @@ using Printf
 using LinearAlgebra
 Random.seed!(123)
 
-H = 4
-J = 4
+H = 7
+J = 7
 T = 2
 Ω = 2
 p = [1/Ω for ω in 1:Ω]
