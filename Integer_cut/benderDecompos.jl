@@ -274,6 +274,11 @@ function initiate()
         print("$df");
         print("\n \n ")
         
+        if LB ≥ Θ_min
+            println("#######       OPTIMALITY      ##############")
+            break
+        end
+        
         @variable(mp, y[1:T, 1:Ω, 1:H], Bin)
         @variable(mp, δ[t=1:T, ω=1:Ω, 1:length( zʳ[t,ω] ) ], Bin)
         
@@ -315,21 +320,43 @@ function initiate()
             end
         end
         
-        for t in 1:T
+         for t in 1:T
+            for ω in 1:Ω
+                print(" \n  \n")
+                print("l5[$t,$ω] = ", l5[t,ω] )
+            end
+        end
+        
+         for t in 1:T
             for ω in 1:Ω
                 for l in 2:length(zʳ[t,ω])
-                    for h in 1:H
-                        print(" \n  \n")
-                        print("l5[$t,$ω] = ", l5[t,ω] )
-                        print(" \n  \n")
-                        print("l4[$t,$ω,$l] = ", l4[t,ω,l] )
-                        print(" \n  \n")
-                        print("l3[$t,$ω] = ", l3[t,ω]) 
-                        print(" \n  \n")
-                        print("l2[$t,$ω,$h] = ", l2[t,ω,h]) 
-                        print(" \n  \n")
-                        print("l1[$t,$ω,$h] = ", l1[t,ω,h]) 
-                    end
+                     print(" \n  \n")
+                    print("l4[$t,$ω,$l] = ", l4[t,ω,l] )
+                end
+            end
+        end
+        
+         for t in 1:T
+            for ω in 1:Ω
+                print(" \n  \n")
+                print("l3[$t,$ω] = ", l3[t,ω]) 
+            end
+        end
+        
+         for t in 1:T
+            for ω in 1:Ω
+                for h in 1:H
+                    print(" \n  \n")
+                    print("l2[$t,$ω,$h] = ", l2[t,ω,h]) 
+                end
+            end
+        end
+        
+        for t in 1:T
+            for ω in 1:Ω
+                for h in 1:H
+                    print(" \n  \n")
+                    print("l1[$t,$ω,$h] = ", l1[t,ω,h]) 
                 end
             end
         end
